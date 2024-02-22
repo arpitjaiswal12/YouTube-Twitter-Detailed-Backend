@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The advance backend introduction ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "author": "Arpit Jaiswal",
+  "license": "ISC",
+  "devDependencies": { 
+    "nodemon": "^3.0.3"
+  }
+}

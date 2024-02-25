@@ -10,6 +10,6 @@ const connectDB = async ()=>{
         console.log("MONGODB connection error :", error)
         process.exit(1);
     }
-}
+} ; // this function is return promise so we can use .then().cath() method also 
 
 export default connectDB;

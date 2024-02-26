@@ -13,3 +13,9 @@
 * A refresh token is a long-lived token used by an application to obtain new access tokens when the current access token expires.
 * When the access token expires, the application can use the refresh token to request a new access token **without requiring the user to log in again**.
 * Refresh tokens are usually stored securely to prevent unauthorized access, such as in an HTTP-only cookie or a secure storage mechanism.
+
+## File upload using multer on Cloudinary
+npm i multer | npm i cloudinary 
+![file_upload](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/dbbe027a-5341-486a-913f-914b0dd10761)
+**DiskStorage** -multer
+The disk storage engine gives you full control on storing files to disk.

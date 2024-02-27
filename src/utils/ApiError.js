@@ -13,7 +13,7 @@ class ApiError extends Error {
     this.errors = errors;
 
     // this code written in production grade
-    if (statck) {
+    if (stack) {
       // check proper stack trace to check the error
       this.stack = stack;
     } else {

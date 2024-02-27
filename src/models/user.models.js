@@ -58,7 +58,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next(); // field modify nhi hua to
 
-  this.password = bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 }); // events that may execute // jab bhe data save ho raha ho mujhe kuch kaam karwana hai  // here we does not use arrow function beacuse arrow function does not support "this" keyword , but here this reference is important // async because encription is time taking process// this is "pre" hook
 

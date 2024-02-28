@@ -19,3 +19,44 @@ npm i multer | npm i cloudinary
 ![file_upload](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/dbbe027a-5341-486a-913f-914b0dd10761)
 **DiskStorage** -multer
 The disk storage engine gives you full control on storing files to disk.
+
+## HTTP response status
+HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes:
+
+1. Informational responses (100 – 199)
+2. Successful responses (200 – 299)
+3. Redirection messages (300 – 399)
+4. Client error responses (400 – 499)
+5. Server error responses (500 – 599)
+
+### Some HTTP status codes :
+100 - Continue: The client should continue with its request. This is typically used when the server wants to confirm receipt of part of a request.
+
+102 - Processing: This is an interim response used to inform the client that the server has received the request and is processing it.
+
+200 - OK: The request has succeeded. The information returned with the response is dependent on the method used in the request, for example, GET requests return requested content.
+
+201 - Created: The request has been fulfilled, resulting in the creation of a new resource.
+
+202 - Accepted: The request has been accepted for processing, but the processing has not been completed yet.
+
+307 - Temporary Redirect: The requested page has been temporarily moved to a new URL. The client should continue to use the original URL for future requests.
+
+308 - Permanent Redirect: Similar to 307, but indicates that the requested page has been permanently moved to a new URL.
+
+400 - Bad Request: The request cannot be fulfilled due to bad syntax or other client-side error.
+
+401 - Unauthorized: The request requires user authentication. The client must provide credentials to access the requested resource.
+
+402 - Payment Required: This code is reserved for future use and represents the possibility of digital cash or some form of online payment.
+
+404 - Not Found: The server cannot find the requested resource.
+
+409 - Conflict: Indicates that the request could not be processed because of a conflict in the request.
+
+500 - Internal Server Error: A generic error message indicating that an unexpected condition was encountered on the server.
+
+504 - Gateway Timeout: The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server it accessed in attempting to complete the request.
+   
+
+

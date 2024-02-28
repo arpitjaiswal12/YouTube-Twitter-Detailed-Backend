@@ -20,6 +20,7 @@ const uploadOnCloudinary = async (localFilePath) => {
       "with url : ",
       response.url
     );
+    fs.unlinkSync(localFilePath); // removing file synchronously 
     return response;
   } catch (error) {
     // file is on my server but not uploaded then we need to remove that file from our server as it my conatin malicous things 

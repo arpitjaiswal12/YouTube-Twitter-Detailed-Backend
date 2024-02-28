@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.fileUpload.js";
+import {storeImage} from "../utils/firebase.fileupload.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -34,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   /* This is a Mongoose query method that searches for a single document in the User collection that matches the specified criteria. In this case, it's using the $or operator to search for documents where either the "username" or the "email" field matches one of the provided values. */
-  const existedUser = User.findOne({
+  const existedUser = await User.findOne({
     $or: [{ username }, { email }],
   });
 
@@ -54,17 +55,21 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // now upload files to cloudinary
 
-  const avatar = await uploadOnCloudinary(avatarLocalPath); // this will take time to upload  // this will return response
-  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+  //const avatar = await uploadOnCloudinary(avatarLocalPath); // this will take time to upload  // this will return response
+  //const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+  const avatar = storeImage(avatarLocalPath.originalname); // this will take time to upload  // this will return response
+  console.log(avatar);
+  const coverImage = storeImage(coverImageLocalPath.originalname);
 
-  if (!avatar) {
-    throw new ApiError(400, "Avatr is required !");
-  }
+  // if (!avatar) {
+  //   throw new ApiError(400, "Avatr is required !");
+  // }
 
   // entry in database
   const user = await User.create({
     fullName,
-    avatar: avatar.url,
+    // avatar:avatar.url
+    avatar: avatar?.url||"https://cdn4.vectorstock.com/i/1000x1000/06/18/male-avatar-profile-picture-vector-10210618.jpg",
     coverImage: coverImage?.url || "", //agar coverImage hai to url nekal lo
     email,
     password,

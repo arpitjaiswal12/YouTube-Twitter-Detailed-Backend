@@ -10,13 +10,13 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 const generateAccessAndRefreshToken = async (userID) => {
   try {
     const user = await User.findById(userID);
-    const acessToken = user.generateAccessToken();
+    const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
     user.save({ validateBeforeSave: false }); // does not need to check validation
 
-    return { acessToken, refreshToken };
+    return { accessToken, refreshToken };
   } catch (error) {
     throw new ApiError(
       500,
@@ -77,9 +77,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //const avatar = await uploadOnCloudinary(avatarLocalPath); // this will take time to upload  // this will return response
   //const coverImage = await uploadOnCloudinary(coverImageLocalPath);
-  const avatar = storeImage(avatarLocalPath.originalname); // this will take time to upload  // this will return response
-  console.log(avatar);
-  const coverImage = storeImage(coverImageLocalPath.originalname);
+  // const avatar = storeImage(avatarLocalPath.originalname); // this will take time to upload  // this will return response
+  // console.log(avatar);
+  // const coverImage = storeImage(coverImageLocalPath.originalname);
 
   // if (!avatar) {
   //   throw new ApiError(400, "Avatr is required !");
@@ -90,9 +90,9 @@ const registerUser = asyncHandler(async (req, res) => {
     fullName,
     // avatar:avatar.url
     avatar:
-      avatar?.url ||
       "https://cdn4.vectorstock.com/i/1000x1000/06/18/male-avatar-profile-picture-vector-10210618.jpg",
-    coverImage: coverImage?.url || "", //agar coverImage hai to url nekal lo
+    coverImage: "", //agar coverImage hai to url nekal lo
+    // coverImage: coverImage?.url || "", //agar coverImage hai to url nekal lo
     email,
     password,
     username: username.toLowerCase(),
@@ -124,6 +124,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // return response
 
   const { username, email, password } = req.body;
+  console.log(email);
 
   if (!(username || email)) {
     throw new ApiError(400, "username or email is required !!");
@@ -143,7 +144,7 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Invalid Credentials");
   }
 
-  const { acessToken, refreshToken } = await generateAccessAndRefreshToken(
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
     user._id
   );
 
@@ -160,13 +161,13 @@ const loginUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("accessToken", acessToken, options)
+    .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
       new ApiResponse(
         200,
         {
-          user: acessToken,
+          user: accessToken,
           refreshToken,
           loggedInUser,
         },
@@ -175,11 +176,11 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
-const logoutUser = asyncHandler(async () => {
+const logoutUser = asyncHandler(async (req,res) => {
   //geeting the current user
-  //update or clear the current user cookies so it get logged out 
+  //update or clear the current user cookies so it get logged out
   await User.findByIdAndUpdate(
-    req.user._id, //as user is login and update 
+    req.user._id, //as user is login and update
     {
       $unset: {
         refreshToken: 1, // this removes the field from document
@@ -190,7 +191,8 @@ const logoutUser = asyncHandler(async () => {
     }
   );
 
-  const options = { // means cookies can only be updated from server
+  const options = {
+    // means cookies can only be updated from server
     httpOnly: true,
     secure: true,
   };
@@ -202,4 +204,4 @@ const logoutUser = asyncHandler(async () => {
     .json(new ApiResponse(200, {}, "User logged Out"));
 });
 
-export { registerUser, loginUser,logoutUser };
+export { registerUser, loginUser, logoutUser };

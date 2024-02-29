@@ -65,13 +65,14 @@ userSchema.pre("save", async function (next) {
 //  but this pre method always call we user save its profile or save its avatar
 
 /*Defining the custom methods - isPasswordCorrect is user define method*/
-userSchema.methods.isPasswordCorrect = async function (passowrd) {
-  return await bcrypt.compare(passowrd, this.passowrd);
+userSchema.methods.isPasswordCorrect = async function (password) {
+  return bcrypt.compare(password, this.password);
 };
+
 
 userSchema.methods.generateAccessToken = function () {
   // jwt.sign() // this method generate token
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
       email: this.email,
@@ -86,7 +87,7 @@ userSchema.methods.generateAccessToken = function () {
 };
 
 userSchema.methods.generateRefreshToken = function () { //this token only refresh to generate acess token 
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
     },

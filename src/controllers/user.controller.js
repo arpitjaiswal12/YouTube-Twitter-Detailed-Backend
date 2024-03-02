@@ -290,7 +290,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
   // authmiddleware give u current user
   return res
     .status(200)
-    .json(200, req.user, "current user fetched successfully !");
+    .json(new ApiResponse(200, req.user, "current user fetched successfully !"));
 });
 
 const updateAccount = asyncHandler(async (req, res) => {
@@ -299,12 +299,12 @@ const updateAccount = asyncHandler(async (req, res) => {
   // production mai kya hota hai ki file update krna ke liya alag controller banta hai
   const { username, fullName, email } = req.body;
   //check karo dono aa rahi hai ki nhi
-  if (!username || !fullName || !email) {
+  if (!(username || fullName || email)) {
     throw new ApiError(400, "All fields are required!!");
   }
 
   // ab muhe db mai find krna hai ki username/ mail database mai kisi aur user ka same to nhi hai
-  const checkExistence = await User.find({
+  const checkExistence = await User.findOne({
     $or: [{ username }, { email }],
   });
   if (checkExistence) {

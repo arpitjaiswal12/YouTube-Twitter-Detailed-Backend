@@ -81,17 +81,17 @@ So why we have created a different subscriptionSchema?
    </br>
    Here is the syntax for the $lookup stage:
    </br>
-{
-  $lookup: {
-    from: "<foreignCollection>", // from: Specifies the name of the foreign collection to join with.
-    localField: "<localField>", // localField: Specifies the field from the input documents that will be used for the join.
-    foreignField: "<foreignField>", // foreignField: Specifies the field from the foreign collection that will be used for the join.
-    as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.
-  }
-}
+{   </br>
+  $lookup: {   </br>
+    from: "<foreignCollection>", // from: Specifies the name of the foreign collection to join with.    </br>
+    localField: "<localField>", // localField: Specifies the field from the input documents that will be used for the join.   </br>
+    foreignField: "<foreignField>", // foreignField: Specifies the field from the foreign collection that will be used for the join.   </br>
+    as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.   </br>
+  }   </br>
+}   </br>
 [$lookup (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation-)
 </br>
-3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields. [$addFields (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation-)
+3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields. [$addFields (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation-)    </br>
 4. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output. [$project (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation-)
 
 

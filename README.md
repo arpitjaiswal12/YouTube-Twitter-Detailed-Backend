@@ -68,15 +68,16 @@ So why we have created a different subscriptionSchema?
 [Subscriber_schema_discription](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/5b5cbaef-2c98-4a75-9efb-12b0292a5251)
 
 ## Introduction to Aggregate pipeline MongoDB:
-(Reference)[https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918#aggregation-pipeline]
+[Reference](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918#aggregation-pipeline)
 
 1. An aggregation pipeline in MongoDB is a sequence of stages that process documents. Each stage **performs an operation on the input** ***documents*** and passes the ***output to the next stage***.
 2. Aggregation pipelines allow you to perform complex analytics and data processing tasks on your data.
-3. An aggregation pipeline can **return results for groups of documents**. For example, return the total, average, maximum, and minimum values. [Aggregation Pipeline](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918)
+3. An aggregation pipeline can **return results for groups of documents**. For example, return the total, average, maximum, and minimum values.
+[Aggregation Pipeline](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918)
 
 #### Stages in pipelines:-
 1. $match - The $match stage in the aggregation pipeline is used to **filter documents** and *pass only the ones* that match the specified condition(s) to the *next stage* of the pipeline. { $match: { <query> } }
-   [$match (aggregation)](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?_ga=2.183359523.485675367.1709374307-82685267.1702966918#-match--aggregation-)
+   [$match aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?_ga=2.183359523.485675367.1709374307-82685267.1702966918#-match--aggregation-)
 2. $lookup - The $lookup stage in the aggregation pipeline is used to perform a **left outer join** between two collections.
    </br>
    Here is the syntax for the $lookup stage:
@@ -89,10 +90,12 @@ So why we have created a different subscriptionSchema?
     as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.   </br>
   }   </br>
 }   </br>
-[$lookup aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation-)
+![$lookup aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation-)
 </br>
-3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields. [$addFields aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation-)    </br>
-4. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output. [$project aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation-)
+3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields.
+![$addFields aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation-)    </br>
+5. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output.
+![$project aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation-)
 
 
 

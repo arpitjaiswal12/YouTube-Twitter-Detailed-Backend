@@ -290,7 +290,9 @@ const getCurrentUser = asyncHandler(async (req, res) => {
   // authmiddleware give u current user
   return res
     .status(200)
-    .json(new ApiResponse(200, req.user, "current user fetched successfully !"));
+    .json(
+      new ApiResponse(200, req.user, "current user fetched successfully !")
+    );
 });
 
 const updateAccount = asyncHandler(async (req, res) => {
@@ -401,6 +403,82 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     );
 });
 
+const getUserChannelProfile = asyncHandler(async (req, res) => {
+  // from the request parameter i will find the username and get its channel
+  const { username } = req.params;
+
+  if (!username) {
+    throw new ApiError(400, "Username is missing!");
+  }
+
+  // now need to create an channel
+
+  const channel = await User.aggregate([
+    {
+      $match: {
+        username: username?.toLowerCase(),
+      },
+    }, // this pipeline returns the complete user with this provided username
+    {
+      $lookup: {
+        from: "subscriptions",
+        localField: "_id", //id from user schema
+        foreignField: "channel", // outside document which paramter need to be compare so as channel consist of id of user
+        as: "subscribers", // name of new array - this will contain result of join operation
+      },
+    },
+    {
+      $lookup: {
+        from: "subscriptions",
+        localField: "_id",
+        foreignField: "subscriber", // as subscriber also contain the id of user
+        as: "subscribedTo",
+      },
+    },
+    {
+      $addFields: {
+        // this fields are added to Userschema with attribute name  "subscribersCount" and "channelsSubscribedToCount"
+        subscribersCount: {
+          $size: "$subscribers",
+        },
+        channelsSubscribedToCount: {
+          $size: "$subscribedTo",
+        },
+        isSubscribed: {
+          $cond: {
+            if: { $in: [req.user?._id, "$subscribers.subscriber"] }, // is my user_id is subscribed to an channel
+            then: true,
+            else: false,
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        // the fields which need to be pass to user are marked as flag
+        fullName: 1,
+        username: 1,
+        subscribersCount: 1,
+        channelsSubscribedToCount: 1,
+        isSubscribed: 1,
+        avatar: 1,
+        coverImage: 1,
+        email: 1,
+      },
+    },
+  ]);
+
+  if (!channel?.length) {
+    throw new ApiError(404, "channel does not exists !");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, channel[0], "User channel fetched successfully")
+    );
+});
+
 export {
   registerUser,
   loginUser,
@@ -410,5 +488,5 @@ export {
   getCurrentUser,
   updateAccount,
   updateUserAvatar,
-  updateUserCoverImage
+  updateUserCoverImage,
 };

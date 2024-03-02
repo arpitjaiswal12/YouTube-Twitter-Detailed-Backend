@@ -57,6 +57,13 @@ HTTP response status codes indicate whether a specific HTTP request has been suc
 500 - Internal Server Error: A generic error message indicating that an unexpected condition was encountered on the server.
 
 504 - Gateway Timeout: The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server it accessed in attempting to complete the request.
-   
+
+### To include subscriber count and channel count in a user profile.
+So why we have created a different subscriptionSchema?
+
+![content](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/4cb3d909-72c4-42c7-8561-29f1cfbce4ba)
+
+![Subscriber_schema_discription ](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/5b5cbaef-2c98-4a75-9efb-12b0292a5251)
+
 
 

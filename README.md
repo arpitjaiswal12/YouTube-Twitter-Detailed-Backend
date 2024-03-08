@@ -92,16 +92,16 @@ So why we have created a different subscriptionSchema?
     as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.   </br>
   }   </br>
 }   </br>
-![$lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation-)
+[$lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation)
 </br>
 3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields.
-![$addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation-)    </br>
+[$addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation)    </br>
 5. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output.
-![$project_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation-)
+[$project_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation)
 
 ### Subpipeline using aggregations:
 
-![sub-pipeline-watchHistory](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/d787fe90-caf7-4756-b747-eba7af94755d)
+[sub-pipeline-watchHistory](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/d787fe90-caf7-4756-b747-eba7af94755d)
 
 $match: This is the initial stage in the main pipeline and is not a part of the sub-pipeline. *It filters the User collection based on the provided _id*.
 

@@ -117,6 +117,14 @@ The outer $lookup stage in the main pipeline is then followed by the $addFields 
 
 **req.user._id return *String* and internally mongoose convert it to _id: ObjectId('65e0e9fbfdf7te5d501e2')**
 
+### what does this module do "import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
+When you perform an aggregation query in MongoDB using Mongoose, *the result set might be large, especially in scenarios like analytics or reporting where you are processing a large amount of data*. In such cases, it's common to paginate the results to improve performance and user experience. **Pagination involves breaking the result set into smaller, more manageable chunks or pages**.
+<br>
+Mongoose's built-in pagination methods allow you to paginate the results of queries made using the "find()" method:-
+
+
+
+
 
 
 

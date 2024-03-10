@@ -4,6 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.fileUpload.js";
+import mongoose from "mongoose";
 
 const publishAVideo = asyncHandler(async (req, res) => {
   const { title, description, duration, isPublished } = req.body;
@@ -82,22 +83,57 @@ const deleteVideo = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, deleteVideo, "video deleted successfully"));
 });
 
-
-// this will return all videos uploaded by the user 
+// this will return all videos uploaded by the user
 const getAllVideos = asyncHandler(async (req, res) => {
-    const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query
-    //TODO: get all videos based on query, sort, pagination
-    // get current user 
-    // search video document from current user and return that 
-    const owner=req.user?._id;
+  const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query;
+  //TODO: get all videos based on query, sort, pagination
+  // get current user
+  // search video document from current user and return that
+  const owner = req.user?._id;
 
-    const videos=await Video.find({owner})
-    if(!videos){
-        throw new ApiError(400,"Videos are not found !")
-    }
+  const videos = await Video.find({ owner });
+  if (!videos) {
+    throw new ApiError(400, "Videos are not found !");
+  }
 
-    console.log(videos)
-    return res.status(200).json(new ApiResponse(200,videos,"All videos are fetched!!"))
-})
+  console.log(videos);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, videos, "All videos are fetched!!"));
+});
 
-export { publishAVideo, getVideoById,deleteVideo ,getAllVideos};
+const updateVideo = asyncHandler(async (req, res) => {
+//   const { videoId } = req.params;
+//   const { videoId } = mongoose.Types.ObjectId(req.params);
+  //TODO: update video details like title, description, thumbnail, visibility
+  const { title, description, isPublished } = req.body;
+
+//   if (!(title || description || isPublished)) {
+//     throw new ApiError(400, "Fields are required to update !");
+//   }
+
+  // to update thumbnail
+  const updatethumbnail = req.files?.thumbnail[0]?.path;
+
+  // upload to cloudinary
+  const updatedThumbnail = await uploadOnCloudinary(updatethumbnail);
+
+  const updateVideo = await Video.findByIdAndUpdate(
+    {  videoId },
+    {
+      $set: {
+        title,
+        description,
+        isPublished,
+      },
+    },
+    { new: true }
+  );
+
+  console.log(updateVideo);
+  return res
+    .status(200)
+    .json(new ApiResponse(200, updateVideo, "Video updated successfully !"));
+});
+
+export { publishAVideo, getVideoById, deleteVideo, getAllVideos,updateVideo };

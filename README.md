@@ -1,4 +1,4 @@
-# This repository consists of a detailed introduction to the backend- 
+# A detailed introduction to the backend - 
 ## Useful references: 
 [express](https://expressjs.com/en/5x/api.html)
 [json-Vs-Bson](https://www.mongodb.com/json-and-bson)
@@ -95,7 +95,7 @@ So why we have created a different subscriptionSchema?
 [lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation)
 </br>
 3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields.
-[addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation)    </br>
+[addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation)
 5. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output.
 [$project_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation)
 

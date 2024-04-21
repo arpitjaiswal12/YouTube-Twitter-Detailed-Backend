@@ -1,4 +1,4 @@
-# This repository consists of a detailed introduction to the backend- 
+# A detailed introduction to the backend - 
 ## Useful references: 
 [express](https://expressjs.com/en/5x/api.html)
 [json-Vs-Bson](https://www.mongodb.com/json-and-bson)
@@ -65,9 +65,9 @@ HTTP response status codes indicate whether a specific HTTP request has been suc
 ### To include subscriber count and channel count in a user profile.
 So why we have created a different subscriptionSchema?
 
-[content](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/4cb3d909-72c4-42c7-8561-29f1cfbce4ba)
+![content](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/4cb3d909-72c4-42c7-8561-29f1cfbce4ba)
 
-[Subscriber_schema_discription](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/5b5cbaef-2c98-4a75-9efb-12b0292a5251)
+![Subscriber_schema_discription](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/5b5cbaef-2c98-4a75-9efb-12b0292a5251)
 
 ## Introduction to Aggregate pipeline MongoDB:
 [Reference](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918#aggregation-pipeline)
@@ -79,7 +79,7 @@ So why we have created a different subscriptionSchema?
 
 #### Stages in pipelines:-
 1. $match - The $match stage in the aggregation pipeline is used to **filter documents** and *pass only the ones* that match the specified condition(s) to the *next stage* of the pipeline. { $match: { <query> } }
-   [$match_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?_ga=2.183359523.485675367.1709374307-82685267.1702966918#-match--aggregation-)
+   [$match_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?_ga=2.183359523.485675367.1709374307-82685267.1702966918#-match--aggregation-) <br>
 2. $lookup - The $lookup stage in the aggregation pipeline is used to perform a **left outer join** between two collections.
    </br>
    Here is the syntax for the $lookup stage:
@@ -91,11 +91,12 @@ So why we have created a different subscriptionSchema?
     foreignField: "<foreignField>", // foreignField: Specifies the field from the foreign collection that will be used for the join.   </br>
     as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.   </br>
   }   </br>
-}   </br>
-[$lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation)
+}
 </br>
-3. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields.
-[$addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation)    </br>
+[lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation)
+</br>
+4. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields. <be>
+[addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation) <br>
 5. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output.
 [$project_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation)
 

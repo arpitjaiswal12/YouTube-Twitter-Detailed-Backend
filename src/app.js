@@ -28,4 +28,9 @@ app.use("/api/v1/users",userRouter)
 app.use("/api/v1/subscription",subcriptionRouter)
 app.use("/api/v1/videos",videoRouter);
 
+
+app.get("/", (req, res) => {
+  res.send("Introduction to the backend");
+});
+
 export { app };

@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import connectDB from "./database/dbconnect.js";
+import connectDB from "../src/database/dbconnect.js";
 import dotenv from "dotenv"
 // import express  from "express";
 // const app=express();
-import {app} from "./app.js"
+import {app} from "../src/app.js"
 const PORT=process.env.PORT || 8000;
 dotenv.config({
     path:'./.env'

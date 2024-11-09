@@ -15,6 +15,7 @@ const userSchema = new Schema(
         index: true: This specifies that an index should be created on the username field. Indexes are used to optimize queries, such as searching for documents based on the value of the indexed field. In this case, an index on the username field would allow for faster searching based on usernames.
         */
     },
+    
     email: {
       type: String,
       required: true,
@@ -22,6 +23,7 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+
     fullName: {
       type: String,
       required: true,

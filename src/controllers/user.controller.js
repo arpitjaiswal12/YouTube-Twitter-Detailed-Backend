@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 // method to generate access and refresh tokens
-
 const generateAccessAndRefreshToken = async (userID) => {
   try {
     const user = await User.findById(userID);

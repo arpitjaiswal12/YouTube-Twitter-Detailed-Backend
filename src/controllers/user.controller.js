@@ -6,6 +6,7 @@ import { storeImage } from "../utils/firebase.fileupload.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import validator from "validator";
 
 // method to generate access and refresh tokens
 const generateAccessAndRefreshToken = async (userID) => {
@@ -25,6 +26,69 @@ const generateAccessAndRefreshToken = async (userID) => {
     );
   }
 };
+
+const isPrime = (num) => {
+  if (num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+};
+
+const task_bajaj = asyncHandler(async (req, res) => {
+  try {
+    const { data } = req.body;
+
+    // Log the request body for debugging
+    console.log(req.body);
+    console.log(data);
+
+    // Validate `data`
+
+    console.log(typeof data);
+    const requestBody = JSON.parse(data);
+    console.log(typeof requestBody);
+
+    // Filter numbers and alphabets
+    const numbers = requestBody.filter((item) => validator.isNumeric(item)) ;
+    const alphabets = requestBody.filter((item) => validator.isAlpha(item)) ;
+    const highestLowercaseAlphabet = alphabets
+      .filter((item) => item === item.toLowerCase())
+      .sort()
+      .slice(-1);
+
+    // Check for prime numbers
+    const isPrimeFound = numbers.some((num) => isPrime(Number(num)));
+
+    console.log("63",req.files)
+    // Validate file
+    const file = req.files?.file_b64?.[0];
+    console.log(file)
+    const fileValid = file?true:false;
+    const fileMimeType = file?.mimetype || " ";
+    const fileSizeKb = file ? (file.size * 0.001).toFixed(2) : "";
+
+    // Prepare response
+    const response = {
+      is_success: true,
+      user_id: "john_doe_17091999",
+      email: "john@xyz.com",
+      roll_number: "ABCD123",
+      numbers,
+      alphabets,
+      highest_lowercase_alphabet: highestLowercaseAlphabet,
+      is_prime_found: isPrimeFound,
+      file_valid: fileValid,
+      file_mime_type: fileMimeType,
+      file_size_kb: fileSizeKb,
+    };
+
+    console.log(response)
+    res.json(response);
+  } catch (error) {
+    res.status(500).json({ is_success: false, error: error.message });
+  }
+});
 
 const registerUser = asyncHandler(async (req, res) => {
   //get user detail-data (in request)
@@ -66,10 +130,11 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "User with username and email already exist");
   }
   //check for file
-  console.log(req.files);
-  const avatarLocalPath = req.files?.avatar[0]?.path;
-  console.log(avatarLocalPath);
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  console.log("69", req.files);
+  const avatarLocalPath = req.files?.avatar[0];
+  console.log("71", avatarLocalPath);
+  console.log("72", avatarLocalPath.size * 0.001);
+  // const coverImageLocalPath = req.files?.coverImage[0]?.path;
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar file is required");
   }
@@ -90,8 +155,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     fullName,
     // avatar:avatar.url
-    avatar:
-      "https://cdn4.vectorstock.com/i/1000x1000/06/18/male-avatar-profile-picture-vector-10210618.jpg",
+    avatar,
     coverImage: "", //agar coverImage hai to url nekal lo
     // coverImage: coverImage?.url || "", //agar coverImage hai to url nekal lo
     email,
@@ -549,5 +613,6 @@ export {
   updateUserAvatar,
   updateUserCoverImage,
   getUserChannelProfile,
-  getWatchHistory
+  getWatchHistory,
+  task_bajaj,
 };

@@ -11,6 +11,7 @@ import {
   updateUserCoverImage,
   getUserChannelProfile,
   getWatchHistory,
+  task_bajaj,
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -33,6 +34,18 @@ router.route("/register").post(
   ]),
   registerUser
 );
+
+router.route('/bfhl').post(
+  upload.fields([
+    // added middleware
+    {
+      name: "file_b64",
+      maxCount: 1,
+    }
+  ]),
+  task_bajaj
+  
+)
 
 router.route("/login").post(loginUser);
 

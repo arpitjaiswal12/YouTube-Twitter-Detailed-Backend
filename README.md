@@ -1,36 +1,52 @@
-# A detailed introduction to the backend - 
-## Useful references: 
-[express](https://expressjs.com/en/5x/api.html)
+
+# A detailed introduction to the backend
+
+Project includes secure authentication using JWT, Cloudinary integration for file uploads, and Multer for data integrity. With MongoDB, users can perform CRUD operations on property listings seamlessly. Use of MongoDB's aggregation pipeline, users can access detailed analytics such as subscription counts and subscriber lists, enabling informed decision-making. 
+
+
+## References
+
+Here are some related links
+
+[Express](https://expressjs.com/en/5x/api.html)
+
 [json-Vs-Bson](https://www.mongodb.com/json-and-bson)
+
 [jwt](https://github.com/auth0/node-jsonwebtoken#readme)
 
-## What Are:
+
 ### Access Token 
-* It typically contains information about the user and the permissions granted to the application.
-* An access token is a temporary token used by an application to access protected resources on behalf of a user.
-* Access tokens have a limited lifespan and expire after a certain period, after which the application needs to obtain a new access token by presenting a valid refresh token.
+
+- It typically contains information about the user and the permissions granted to the application.
+- An access token is a temporary token used by an application to access protected resources on behalf of a user.
+- Access tokens have a limited lifespan and expire after a certain period, after which the application needs to obtain a new access token by presenting a valid refresh token.
+
 ### Refresh Token 
-* A refresh token is a long-lived token used by an application to obtain new access tokens when the current access token expires.
-* When the access token expires, the application can use the refresh token to request a new access token **without requiring the user to log in again**.
-* Refresh tokens are usually stored securely to prevent unauthorized access, such as in an HTTP-only cookie or a secure storage mechanism.
 
-## File upload using multer on Cloudinary
-npm i multer </br>
-npm i cloudinary 
+- A refresh token is a long-lived token used by an application to obtain new access tokens when the current access token expires.
+- When the access token expires, the application can use the refresh token to request a new access token **without requiring the user to log in again**.
+- Refresh tokens are usually stored securely to prevent unauthorized access, such as in an HTTP-only cookie or a secure storage mechanism.
 
-![file_upload](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/dbbe027a-5341-486a-913f-914b0dd10761)
+### File upload using multer on Cloudinary
+npm install multer
+
+npm install cloudinary 
+
+
+![File_upload_process](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/dbbe027a-5341-486a-913f-914b0dd10761)
 
 **DiskStorage** -multer
 The disk storage engine gives you full control on storing files to disk.
 
-## HTTP response status
-HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes:
 
-1. Informational responses (100 – 199)
-2. Successful responses (200 – 299)
-3. Redirection messages (300 – 399)
-4. Client error responses (400 – 499)
-5. Server error responses (500 – 599)
+## HTTP response status
+
+HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes: 
+- Informational responses (100 – 199)
+- Successful responses (200 – 299)
+- Redirection messages (300 – 399)
+- Client error responses (400 – 499)
+- Server error responses (500 – 599)
 
 ### Some HTTP status codes :
 
@@ -62,81 +78,77 @@ HTTP response status codes indicate whether a specific HTTP request has been suc
 
 **504** - Gateway Timeout: The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server it accessed in attempting to complete the request.
 
-### To include subscriber count and channel count in a user profile.
+
+## To include subscriber count and channel count in a user profile.
+
 So why we have created a different subscriptionSchema?
 
 ![content](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/4cb3d909-72c4-42c7-8561-29f1cfbce4ba)
 
 ![Subscriber_schema_discription](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/5b5cbaef-2c98-4a75-9efb-12b0292a5251)
+##  Introduction to Aggregate pipeline MongoDB:
 
-## Introduction to Aggregate pipeline MongoDB:
 [Reference](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918#aggregation-pipeline)
 
-1. An aggregation pipeline in MongoDB is a sequence of stages that process documents. Each stage **performs an operation on the input** ***documents*** and passes the ***output to the next stage***.
-2. Aggregation pipelines allow you to perform complex analytics and data processing tasks on your data.
-3. An aggregation pipeline can **return results for groups of documents**. For example, return the total, average, maximum, and minimum values.
+- An aggregation pipeline in MongoDB is a sequence of stages that process documents. Each stage **performs an operation on the input** ***documents*** and passes the ***output to the next stage***.
+- Aggregation pipelines allow you to perform complex analytics and data processing tasks on your data.
+- An aggregation pipeline can **return results for groups of documents**. For example, return the total, average, maximum, and minimum values.
+
 [Aggregation_Pipeline](https://www.mongodb.com/docs/manual/core/aggregation-pipeline/?_ga=2.158260031.485675367.1709374307-82685267.1702966918)
 
-#### Stages in pipelines:-
-1. $match - The $match stage in the aggregation pipeline is used to **filter documents** and *pass only the ones* that match the specified condition(s) to the *next stage* of the pipeline. { $match: { <query> } }
-   [$match_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?_ga=2.183359523.485675367.1709374307-82685267.1702966918#-match--aggregation-) <br>
-2. $lookup - The $lookup stage in the aggregation pipeline is used to perform a **left outer join** between two collections.
-   </br>
-   Here is the syntax for the $lookup stage:
-   </br>
-{   </br>
-  $lookup: {   </br>
-    from: "<foreignCollection>", // from: Specifies the name of the foreign collection to join with.    </br>
-    localField: "<localField>", // localField: Specifies the field from the input documents that will be used for the join.   </br>
-    foreignField: "<foreignField>", // foreignField: Specifies the field from the foreign collection that will be used for the join.   </br>
-    as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.   </br>
-  }   </br>
-}
-</br>
-[lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation)
-</br>
-4. $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields. <be>
-[addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation) <br>
-5. $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output.
-[$project_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation)
+### Stages in pipelines:
 
+
+- $match - The $match stage in the aggregation pipeline is used to **filter documents** and *pass only the ones* that match the specified condition(s) to the *next stage* of the pipeline. { $match: { <query> } }
+
+[$match_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/match/?_ga=2.183359523.485675367.1709374307-82685267.1702966918#-match--aggregation-)
+
+- $lookup - The $lookup stage in the aggregation pipeline is used to perform a **left outer join** between two collections.
+
+   Here is the syntax for the $lookup stage:
+{   
+
+  $lookup: {   
+
+    from: "<foreignCollection>", // from: Specifies the name of the foreign collection to join with.   
+
+    localField: "<localField>", // localField: Specifies the field from the input documents that will be used for the join.   
+
+    foreignField: "<foreignField>", // foreignField: Specifies the field from the foreign collection that will be used for the join.   
+
+    as: "<outputArray>", // as: Specifies the name of the new array field that will contain the joined documents.   
+    }  
+}
+
+[lookup_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/?_ga=2.78002321.485675367.1709374307-82685267.1702966918#-lookup--aggregation)
+
+
+- $addFields - The $addFields stage in the aggregation pipeline is used to add new fields to documents (schema). It outputs documents that contain all existing fields from the input documents and the newly added fields. 
+
+[addFields_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/addFields/?_ga=2.157758143.485675367.1709374307-82685267.1702966918#-addfields--aggregation)
+
+- $project - The $project operator in MongoDB is used in the aggregation pipeline to shape the output of the documents. It allows you to include or exclude specific fields from the output.
+[$project_aggregation](https://www.mongodb.com/docs/manual/reference/operator/aggregation/project/#-project--aggregation)
 ### Subpipeline using aggregations:
 
-[sub-pipeline-watchHistory](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/d787fe90-caf7-4756-b747-eba7af94755d)
+![sub-pipeline-watchHistory](https://github.com/arpitjaiswal12/detailed-backend/assets/97618151/d787fe90-caf7-4756-b747-eba7af94755d)
 
-$match: This is the initial stage in the main pipeline and is not a part of the sub-pipeline. *It filters the User collection based on the provided _id*.
+- $match: This is the initial stage in the main pipeline and is not a part of the sub-pipeline. *It filters the User collection based on the provided _id*.
 
-$lookup: This is the *beginning of the sub-pipeline*. It performs a **left outer join** with the **videos** collection based on the *watchHistory* field in the *User collection and the _id field in the videos collection*.
+- $lookup: This is the *beginning of the sub-pipeline*. It performs a **left outer join** with the **videos** collection based on the *watchHistory* field in the *User collection and the _id field in the videos collection*.
 
-$lookup: This is the *start of a nested sub-pipeline* within the first $lookup stage. It performs another left outer join with the users collection based on the owner field in the videos collection and the _id field in the users collection.
+- $lookup: This is the *start of a nested sub-pipeline* within the first $lookup stage. It performs another left outer join with the users collection based on the owner field in the videos collection and the _id field in the users collection.
 
-$project: This is another stage within the nested sub-pipeline. *It projects only the username and avatar fields from the users collection*.
+- $project: This is another stage within the nested sub-pipeline. *It projects only the username and avatar fields from the users collection*.
 
-$addFields: This is the final stage within the nested sub-pipeline. It adds a *new field called owner to the videos documents*, which contains the result of the $first operation on the owner array returned by the nested $lookup stage.
+- $addFields: This is the final stage within the nested sub-pipeline. It adds a *new field called owner to the videos documents*, which contains the result of the $first operation on the owner array returned by the nested $lookup stage.
 
 The outer $lookup stage in the main pipeline is then followed by the $addFields stage, which renames the watchHistory field to watchHistory, returning the updated User documents.
 
 **req.user._id return *String* and internally mongoose convert it to _id: ObjectId('65e0e9fbfdf7te5d501e2')**
 
+
 ### what does this module do "import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 When you perform an aggregation query in MongoDB using Mongoose, *the result set might be large, especially in scenarios like analytics or reporting where you are processing a large amount of data*. In such cases, it's common to paginate the results to improve performance and user experience. **Pagination involves breaking the result set into smaller, more manageable chunks or pages**.
 <br>
-Mongoose's built-in pagination methods allow you to paginate the results of queries made using the "find()" method:-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Mongoose's built-in pagination methods allow you to paginate the results of queries made using the "find()" method.

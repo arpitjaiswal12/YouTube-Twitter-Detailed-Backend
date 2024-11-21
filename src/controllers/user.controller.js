@@ -47,11 +47,11 @@ const task_bajaj = asyncHandler(async (req, res) => {
 
     console.log(typeof data);
     const requestBody = JSON.parse(data);
-    console.log(requestBody);
+    console.log(typeof requestBody);
 
     // Filter numbers and alphabets
-    const numbers = requestBody.filter((item) => validator.isNumeric(item));
-    const alphabets = requestBody.filter((item) => validator.isAlpha(item));
+    const numbers = requestBody.filter((item) => validator.isNumeric(item)) ;
+    const alphabets = requestBody.filter((item) => validator.isAlpha(item)) ;
     const highestLowercaseAlphabet = alphabets
       .filter((item) => item === item.toLowerCase())
       .sort()
@@ -60,13 +60,13 @@ const task_bajaj = asyncHandler(async (req, res) => {
     // Check for prime numbers
     const isPrimeFound = numbers.some((num) => isPrime(Number(num)));
 
-    console.log(req.files?.file_b64[0]);
-
+    console.log("63",req.files)
     // Validate file
     const file = req.files?.file_b64?.[0];
-    const fileValid = !!file;
-    const fileMimeType = file ? file.mimetype : null;
-    const fileSizeKb = file ? (file.size * 0.001).toFixed(2) : null;
+    console.log(file)
+    const fileValid = file?true:false;
+    const fileMimeType = file?.mimetype || " ";
+    const fileSizeKb = file ? (file.size * 0.001).toFixed(2) : "";
 
     // Prepare response
     const response = {
@@ -83,6 +83,7 @@ const task_bajaj = asyncHandler(async (req, res) => {
       file_size_kb: fileSizeKb,
     };
 
+    console.log(response)
     res.json(response);
   } catch (error) {
     res.status(500).json({ is_success: false, error: error.message });
